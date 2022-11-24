@@ -1,11 +1,18 @@
+
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import CartPage from './pages/CartPage/CartPage';
+import HomePage from './pages/HomePage/HomePage';
 
 
 const App = () => {
   return ( 
-   <div>
-<h1>heloo</h1>
-   </div>
+    <div className='App'>
+  <Routes>  
+    <Route path='/' element={<HomePage/>} />
+    <Route path='/cart' element={<CartPage/>} />
+  </Routes>
+    </div>
   );
 }
  
