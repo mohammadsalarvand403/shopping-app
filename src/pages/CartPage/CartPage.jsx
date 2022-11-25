@@ -1,8 +1,12 @@
+import Layout from "../../Layout/Layout";
+
 const CartPage = () => {
     return ( 
-    <div>
+   <Layout>
+     <main>
       <h1>cart Pages</h1>  
-    </div>
+    </main>
+   </Layout>
      );
 }
  
