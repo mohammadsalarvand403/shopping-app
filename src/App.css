@@ -8,7 +8,6 @@
   list-style: none;
 }
 .productList{
-  display: flex;
   border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(260px ,1fr));

@@ -6,7 +6,7 @@ const CartContextDispacher=createContext();
 
 const initalState={
     cart:[],
-    tital:0
+    total:0
 }
 
 const CartProvider = ({children}) => {
