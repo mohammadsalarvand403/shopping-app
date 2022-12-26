@@ -27,3 +27,21 @@ li{
   color: #581c87;
   background-color: rgb(255, 255, 255);
 }
+.bage{
+    display: flex;
+    position: relative;
+}
+ .navigation span{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #581c87;
+    color: white;
+    font-size: 14px;
+ }

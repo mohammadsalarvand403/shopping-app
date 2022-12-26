@@ -38,9 +38,7 @@ const CartPage = () => {
        )
       })}
      </section>
-     <section className="cartSummery">Cart summery
-     <h2>{total}$</h2>
-     </section>
+    <CartSummery cart={cart}  total={total}/>
     </section>
     </main>
    </Layout>
@@ -48,3 +46,29 @@ const CartPage = () => {
 }
  
 export default CartPage;
+
+const CartSummery = ({total,cart}) => {
+  const orginalTotalPrice=cart.length 
+  ? cart.reduce((acc,curr)=> acc + curr.quntity * curr.price , 0)
+  : 0;
+  return ( 
+    <section className="cartSummery">
+      <h2 style={{marginBottom:"20px"}}>CartSummery</h2>
+      <div className="summeryItem">
+        <p>cart total </p>
+        <p>{orginalTotalPrice}$</p>
+      </div>
+      <div className="summeryItem">
+        <p>cart discount</p>
+        <p>{orginalTotalPrice - total}$</p>
+      </div>
+      <hr />
+      <div className="summeryItem">
+        <p>net price</p>
+        <p>{total}$</p>
+      </div>
+
+    </section>
+   );
+}
+ 

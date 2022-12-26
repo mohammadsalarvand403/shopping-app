@@ -1,9 +1,24 @@
 import Layout from "../../Layout/Layout";
 import * as data from '../../data';
-import { useCartActions } from "../../Providers/CartProvider";
+import { useCart, useCartActions } from "../../Providers/CartProvider";
+import Swal from 'sweetalert2';
+
+function checkInCart(cart,product){
+  return cart.find((c)=> c.id===product.id)
+}
 const HomePage = () => {
+
+  const {cart}=useCart()
+
   const Dispatch=useCartActions()
   const addProductHandler =(product)=>{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${product.name} Add to Cart !`,
+      showConfirmButton: false,
+      timer: 1500
+    })
     Dispatch({type:"ADD_TO_CART",payload:product})
   }
     return ( <div>
@@ -18,7 +33,9 @@ const HomePage = () => {
             <div className="productDec">
               <p>{product.name}</p>
               <p> $ {product.price}</p>
-              <button onClick={()=>addProductHandler(product)} className="btn primary">AddCart</button>
+              <button onClick={()=>addProductHandler(product)} className="btn primary">
+                {checkInCart(cart,product) ?"checkInCart" :"AddCart"}
+                </button>
             </div>
           </section>
         })}

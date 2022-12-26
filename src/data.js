@@ -14,7 +14,7 @@ export const products = [
     },
     {
       id: 2,
-      name: "Adidas",
+      name: "Naik",
       description: [{ support: "گارانتی مادام العمر" }, { support: "اورجینال" }],
       price: 110,
       offPrice: 100,
