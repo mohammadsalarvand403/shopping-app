@@ -48,3 +48,22 @@ height: 100px;
     
 
 }
+.btnGroup button{
+    outline: none;
+    padding: 5px 15px;
+    color: #6d28d9;
+    border: 1px soild;
+    border-color: #6d28d9;
+    background-color: #fff;
+}
+
+.btnGroup button:first-child{
+    border-radius: 5px 0 0 5px;
+}
+.btnGroup button:last-child{
+    border-radius:  0 5px 5px 0 ;
+}
+.btnGroup button:nth-child(2){
+    border-left: 0;
+    border-right: 0;
+}

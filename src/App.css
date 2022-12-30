@@ -43,10 +43,16 @@ border: none;
 padding: 7px 16px;
 background-color: #ede9fe;
 color: #6d28d9;
+cursor: pointer;
 border-radius: 6px;
 }
 .primary{
 background-color: #6d28d9;
 color: #fff;
-
+cursor: pointer;
 }
+button:disabled{
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #444;
+} 
