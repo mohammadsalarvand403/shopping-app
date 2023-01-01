@@ -4,8 +4,19 @@
     justify-content: center;
     width: 100%;
     height: 60px;
-    background-color: #e5d3f6;
+    position: static;
+    background-color: #ede9fe;
     margin-bottom: 10px;
+}
+.navigation nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1170px;
+    background-color: #ede9fe;
+    margin-bottom: 10px;
+    height: 100%;
 }
 ul{
     display: flex;
@@ -44,4 +55,9 @@ li{
     background-color: #581c87;
     color: white;
     font-size: 14px;
+ }
+ li.login{
+    display: flex;
+    align-items: center;
+    justify-content: last baseline;
  }

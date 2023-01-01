@@ -3,30 +3,38 @@ import { useFormik} from "formik";
 import * as Yup from 'yup';
 import Input from "../../common/input";
 import './login.css'
-import { Link } from "react-router-dom";
-const onSubmit=(values)=>{
-    console.log(values);
-//    axios.post("http://localhost:3001/user",values).then((res)=>{
-//     console.log(res.data);
-//    }).catch((e)=>{
-//     console.log(e);
-//    })
-}
+import { Link,useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { loginUser } from "../../Services/LoginServices";
+
 const initialValues={
-    name:"",
     email:"",
-    password:"",
+    password:""
   
 };
 const validationSchema=Yup.object({
-    name:Yup.string().required("Name is required").min(6,"Naem length is not valid"),
     email:Yup.string().email("Invalid email format").required("Email is required"),
     password:Yup.string()
     .required('Please Enter your password')
     
 })
 const Login = () => {
+    const Navigate =useNavigate()
+    const [error,setError]=useState(null)
+    const onSubmit=async (values)=>{
+        try {
+           const {data}=await loginUser(values) ;
+           Navigate("/")
+           setError(null)
+        }catch (error) {
+            if(error.response && error.response.data.message){
+            setError(error.response.data.message)
+    
+            }
+    
+         };
 
+    }
     const formik=useFormik({
         initialValues,
         onSubmit,
@@ -38,10 +46,10 @@ const Login = () => {
         <Layout>
             <div className="form">
             <form onSubmit={formik.handleSubmit}>
-            <Input formik={formik} name="name" label="Name"  />
             <Input formik={formik} name="email" label="Email"  />
             <Input formik={formik} name="password" type='password' label="Password"  />
             <button style={{width:"100%"}} type="submit" disabled={!formik.isValid} className="btn primary">Login</button>
+            {error&&<p style={{color:"red"}}>{error}</p>}               
             <Link to="/signup">
                 <p style={{marginTop:"18px"}}>Not signup yet ?</p>
             </Link>

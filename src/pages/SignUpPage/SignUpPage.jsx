@@ -3,7 +3,7 @@ import { useFormik} from "formik";
 import * as Yup from 'yup';
 import Input from "../../common/input";
 import './signup.css'
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import {signupUser} from "../../Services/signupServices";
 import { useState } from "react";
 
@@ -37,6 +37,7 @@ const validationSchema=Yup.object({
     .oneOf([Yup.ref("password"),null],'is not match password'),
 })
 const SinUpPage = () => {
+    const Navigate =useNavigate()
     const [error , setError]=useState(null);
     const onSubmit= async (values) =>{
      const {name,email,phoneNumber,password}=values;
@@ -48,9 +49,9 @@ const SinUpPage = () => {
      };
      try {
        const {data}= await signupUser(userData);
-       console.log(data);
+       setError(null)
+       Navigate("/")
      } catch (error) {
-        console.log(error.response.data.message);
         if(error.response && error.response.data.message){
         setError(error.response.data.message)
 
@@ -75,7 +76,7 @@ const SinUpPage = () => {
             <Input formik={formik} name="password" type='password' label="Password"  />
             <Input formik={formik} name="passwordConfirm" type='password' label="Password Confirmation"  />
             <button style={{width:"100%"}} type="submit" disabled={!formik.isValid} className="btn primary">signup</button>
-            {error&&<p style={{color:"red"}}>error is :{error}</p>}           
+            {error&&<p style={{color:"red"}}>{error}</p>}           
             <Link to="/login">
                 <p style={{marginTop:"18px"}}>Already Login ?</p>
             </Link>

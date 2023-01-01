@@ -6,15 +6,22 @@ const Navigation = () => {
     return (
    <header className="navigation">
    <nav>
-        <ul>
+    <ul>
+        <li>mohammd Shopping</li>
             <li>
                 <NavLink to="/">Home</NavLink>
             </li>
+
+    </ul>
+        <ul>
             <li className="bage">
                 <NavLink to="/cart">
                 cart
                 <span>{cart.length}</span>
                 </NavLink>
+            </li>
+            <li className="login">
+                <NavLink to="/signup">signup/login</NavLink>
             </li>
             
         </ul>
