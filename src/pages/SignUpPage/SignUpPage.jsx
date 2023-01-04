@@ -3,9 +3,13 @@ import { useFormik} from "formik";
 import * as Yup from 'yup';
 import Input from "../../common/input";
 import './signup.css'
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useNavigate,useSearchParams } from "react-router-dom";
 import {signupUser} from "../../Services/signupServices";
 import { useState } from "react";
+import { useAuth } from "../../Providers/AuthProvider";
+import { useEffect } from "react";
+
+
 
 
 
@@ -39,8 +43,18 @@ const validationSchema=Yup.object({
     .oneOf([Yup.ref("password"),null],'is not match password'),
 })
 const SinUpPage = () => {
-    const Navigate =useNavigate()
+    const [searchParams] = useSearchParams();
+    console.log(searchParams.get('redirect')||"/")
+    const redirect=searchParams.get('redirect')
+    const Navigate =useNavigate();
+    const Auth=useAuth()
     const [error , setError]=useState(null);
+    useEffect(()=>{
+        if (Auth) {
+            Navigate(redirect)
+            
+        }
+    },[redirect,Auth])
     const onSubmit= async (values) =>{
      const {name,email,phoneNumber,password}=values;
      const userData={
@@ -52,7 +66,7 @@ const SinUpPage = () => {
      try {
        const {data}= await signupUser(userData);
        setError(null)
-       Navigate("/")
+       Navigate(redirect)
      } catch (error) {
         if(error.response && error.response.data.message){
         setError(error.response.data.message)
@@ -79,7 +93,7 @@ const SinUpPage = () => {
             <Input formik={formik} name="passwordConfirm" type='password' label="Password Confirmation"  />
             <button style={{width:"100%"}} type="submit" disabled={!formik.isValid} className="btn primary">signup</button>
             {error&&<p style={{color:"red"}}>{error}</p>}           
-            <Link to="/login">
+            <Link to={`/login?redirect=${redirect}`}>
                 <p style={{marginTop:"18px"}}>Already Login ?</p>
             </Link>
             </form>
